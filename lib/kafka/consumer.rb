@@ -20,8 +20,9 @@ module Kafka
     CONSUME_REQUEST_TYPE = Kafka::RequestType::FETCH
     MAX_SIZE = 1048576 # 1 MB
     DEFAULT_POLLING_INTERVAL = 2 # 2 seconds
+    DEFAULT_GROUP_ID = "test"
 
-    attr_accessor :topic, :partition, :offset, :max_size, :request_type, :polling
+    attr_accessor :topic, :partition, :offset, :max_size, :request_type, :polling, :group_id, :consumer_id
 
     def initialize(options = {})
       self.topic        = options[:topic]        || "test"
@@ -32,6 +33,9 @@ module Kafka
       self.max_size     = options[:max_size]     || MAX_SIZE
       self.request_type = options[:request_type] || CONSUME_REQUEST_TYPE
       self.polling      = options[:polling]      || DEFAULT_POLLING_INTERVAL
+      self.group_id     = options[:group_id]     || DEFAULT_GROUP_ID
+      self.consumer_id  = options[:consumer_id]  || Consumer.generate_id(self.group_id)
+      
       self.connect(self.host, self.port)
     end
 
@@ -93,6 +97,12 @@ module Kafka
       end
       self.offset += processed
       messages
+    end
+    
+    private
+    
+    def self.generate_id(group_id)
+      "#{group_id}_#{Socket.gethostname}-#{Time.now.usec}"
     end
   end
 end

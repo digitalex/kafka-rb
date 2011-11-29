@@ -64,6 +64,17 @@ describe Consumer do
       Consumer::MAX_SIZE.should eql(1048576)
       @consumer.max_size.should eql(1048576)
     end
+    
+    it "should generate a consumer id on initialize" do
+      Time.stub!(:now).and_return(Time.new(0))
+      Socket.stub!(:gethostname).and_return("foohost")
+      consumer = Consumer.new({:group_id => "foogroup"})
+      consumer.consumer_id.should eql("foogroup_foohost-0")
+    end
+    
+    it "should have a group id" do
+      @consumer.should respond_to(:group_id)
+    end
 
     it "should return the size of the request" do
       @consumer.request_size.should eql(24)
