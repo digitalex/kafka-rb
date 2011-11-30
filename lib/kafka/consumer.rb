@@ -22,7 +22,7 @@ module Kafka
     DEFAULT_POLLING_INTERVAL = 2 # 2 seconds
     DEFAULT_GROUP_ID = "test"
 
-    attr_accessor :topic, :partition, :offset, :max_size, :request_type, :polling, :group_id, :consumer_id
+    attr_accessor :topic, :partition, :offset, :max_size, :request_type, :polling, :group_id, :consumer_id, :zk_connect
 
     def initialize(options = {})
       self.topic        = options[:topic]        || "test"
@@ -35,6 +35,12 @@ module Kafka
       self.polling      = options[:polling]      || DEFAULT_POLLING_INTERVAL
       self.group_id     = options[:group_id]     || DEFAULT_GROUP_ID
       self.consumer_id  = options[:consumer_id]  || Consumer.generate_id(self.group_id)
+      self.zk_connect   = options[:zk_connect]
+      
+      unless self.zk_connect.nil?
+        @consumer_registry = Kafka::ConsumerRegistry.new(self.zk_connect)
+        @consumer_registry.register(self.group_id, self.consumer_id, self.topic)
+      end
       
       self.connect(self.host, self.port)
     end

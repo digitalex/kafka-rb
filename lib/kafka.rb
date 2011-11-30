@@ -25,6 +25,7 @@ require File.join(File.dirname(__FILE__), "kafka", "batch")
 require File.join(File.dirname(__FILE__), "kafka", "message")
 require File.join(File.dirname(__FILE__), "kafka", "producer")
 require File.join(File.dirname(__FILE__), "kafka", "consumer")
+require File.join(File.dirname(__FILE__), "kafka", "consumer_registry")
 
 module Kafka
 end

@@ -21,7 +21,7 @@ require 'rspec/core/rake_task'
 
 GEM = 'kafka-rb'
 GEM_NAME = 'Kafka Client'
-GEM_VERSION = '0.0.5'
+GEM_VERSION = '0.0.7'
 AUTHORS = ['Alejandro Crosa']
 EMAIL = "alejandrocrosa@gmail.com"
 HOMEPAGE = "http://github.com/acrosa/kafka-rb"

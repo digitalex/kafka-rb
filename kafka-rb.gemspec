@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.description = %q{kafka-rb allows you to produce and consume messages using the Kafka distributed publish/subscribe messaging service.}
   s.email = %q{alejandrocrosa@gmail.com}
   s.extra_rdoc_files = ["LICENSE"]
-  s.files = ["LICENSE", "README.md", "Rakefile", "lib/kafka", "lib/kafka/batch.rb", "lib/kafka/consumer.rb", "lib/kafka/io.rb", "lib/kafka/message.rb", "lib/kafka/producer.rb", "lib/kafka/request_type.rb", "lib/kafka/error_codes.rb", "lib/kafka.rb", "spec/batch_spec.rb", "spec/consumer_spec.rb", "spec/io_spec.rb", "spec/kafka_spec.rb", "spec/message_spec.rb", "spec/producer_spec.rb", "spec/spec_helper.rb"]
+  s.files = ["LICENSE", "README.md", "Rakefile", "lib/kafka", "lib/kafka/batch.rb", "lib/kafka/consumer.rb", "lib/kafka/consumer_registry.rb", "lib/kafka/io.rb", "lib/kafka/message.rb", "lib/kafka/producer.rb", "lib/kafka/request_type.rb", "lib/kafka/error_codes.rb", "lib/kafka.rb", "spec/batch_spec.rb", "spec/consumer_spec.rb", "spec/io_spec.rb", "spec/kafka_spec.rb", "spec/message_spec.rb", "spec/producer_spec.rb", "spec/spec_helper.rb"]
   s.homepage = %q{http://github.com/acrosa/kafka-rb}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
@@ -44,5 +44,5 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rspec>, [">= 0"])
   end
   
-  s.add_dependency(%q<zookeeper>, [">= 0.4.4"])
+  s.add_dependency(%q<zk>, [">= 0.8.5"])
 end
